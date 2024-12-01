@@ -1,0 +1,15 @@
+target/
+Cargo.lock
+dist-newstyle/
+newdist/
+_build
+*.prof
+*.exe
+*.dll
+*.o
+*.uo
+*.ui
+*.dot
+*.pdf
+/aoc-gitcrypt.key
+/session_cookie.txt
