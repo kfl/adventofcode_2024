@@ -35,3 +35,25 @@ two general purpose combinators for `ReadP`: `munchMany` which is a
 generalisation of `munch`, and `skipTill` which is like `manyTill`
 expect that it returns what is matched by the `end` combinator, I've
 need similar combinators in the past.
+
+
+Day 4: Ceres Search
+-------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** Grid parsing via list comprehensions
+
+**Thoughts on the puzzle:** Simple solution using arrays. I'm sure the
+current code could be shortened.
+
+
+Day 5: Print Queue
+------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** String splitting and `read` abuse.
+
+**Thoughts on the puzzle:** Nothing too fancy. Used a `Map` to represent
+the ordering.
