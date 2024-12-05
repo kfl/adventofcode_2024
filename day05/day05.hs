@@ -55,32 +55,35 @@ parse str = (rules, updates)
         rule s = bimap read (read . drop 1) $ break (== '|') s
         update s = read $ "[" <> s <> "]"
 
-rulesMap rules = L.foldl' upsert Map.empty rules
+ordering rules = L.foldl' upsert Map.empty rules
   where upsert acc (x, y) =
           Map.alter (\case Nothing -> Just $ Set.singleton y
                            Just afters -> Just $ Set.insert y afters) x acc
 
 middle xs = xs L.!! (length xs `div` 2)
 
+before ord x y = y `Set.member` Map.findWithDefault Set.empty x ord
+
 correct _ [] = True
-correct rm (p:ps) = all (`Set.member` Map.findWithDefault Set.empty p rm) ps
-                    && correct rm ps
+correct ord (p:ps) = all (before ord p) ps
+                     && correct ord ps
 
 part1 :: Input -> Int
 part1 (rules, updates) = sum middles
-  where rm = rulesMap rules
-        corrects = filter (correct rm) updates
+  where ord = ordering rules
+        corrects = filter (correct ord) updates
         middles = map middle corrects
 
 answer1 = part1 <$> input
 
 part2 :: Input -> Int
 part2 (rules, updates) = sum middles
-  where rm = rulesMap rules
-        incorrects = filter (not . correct rm) updates
+  where ord = ordering rules
+        incorrects = filter (not . correct ord) updates
         cmp x y
-          | x `Set.member` Map.findWithDefault Set.empty y rm = GT
-          | y `Set.member` Map.findWithDefault Set.empty x rm = LT
+          | before ord x y = LT
+          | before ord y x = GT
+          | otherwise = error "different pages should not be equal"
         corrected = map (L.sortBy cmp) incorrects
         middles = map middle corrected
 
