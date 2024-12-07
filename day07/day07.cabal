@@ -1,0 +1,19 @@
+cabal-version:      3.6
+name:               day07
+version:            0.1.0.0
+
+license:            MIT
+license-file:       ../LICENSE
+author:             Ken Friis Larsen
+maintainer:         ken@friislarsen.net
+
+copyright: Ken Friis Larsen <ken@friislarsen.net>
+
+executable day07
+    main-is: day07.hs
+
+    build-depends:    base >= 4 && < 5
+
+    hs-source-dirs:   .
+    default-language: GHC2021
+    ghc-options:      -O2 -threaded -rtsopts -with-rtsopts=-N

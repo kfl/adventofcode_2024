@@ -70,4 +70,21 @@ Day 6: Guard Gallivant
 my taste, it did finish in just below 5s (which is my unofficial
 threshold). To "fix" it I took advantage of the embarrassingly
 parallel opportunity to check all placements of new obstacles. That
-took the running under 1s, and I stopped bothering.
+brought the running under 1s and I stopped bothering.
+
+
+Day 7: Bridge Repair
+--------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** String splitting
+
+**Thoughts on the puzzle:** My straightforward brute-force solution
+solved both parts in less than 2s. That's above the 1s mark, and thus not
+really satisfying. Took advantage of the fact that `0` does not occur as a
+constant in my input and added some simple pruning, that brought the
+running time under 1s.
+
+**Maybe some day:** The problem seem suited for both memorisation or
+parallel search.
