@@ -57,3 +57,17 @@ Day 5: Print Queue
 
 **Thoughts on the puzzle:** Nothing too fancy. Used a `Map` to represent
 the ordering.
+
+
+Day 6: Guard Gallivant
+----------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** Grid parsing via list comprehensions
+
+**Thoughts on the puzzle:** My first solution was a bit too slow for
+my taste, it did finish in just below 5s (which is my unofficial
+threshold). To "fix" it I took advantage of the embarrassingly
+parallel opportunity to check all placements of new obstacles. That
+took the running under 1s, and I stopped bothering.
