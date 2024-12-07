@@ -1,5 +1,6 @@
-{-# LANGUAGE LambdaCase #-}
 module Main where
+
+import qualified Data.List as L
 
 test =  map parse [ "190: 10 19"
                   , "3267: 81 40 27"
@@ -20,13 +21,13 @@ parse :: String -> Equation
 parse str = (read result, map read $ words $ drop 1 constants)
   where (result, constants) = break (== ':') str
 
-canEvaluateTo acc = \case
-  [] -> [acc]
-  x:xs -> canEvaluateTo (acc + x) xs ++ canEvaluateTo (acc * x) xs
+evaluations max ops (x:xs) = L.foldl' eval [x] xs
+  where eval acc y = [ acc' | x <- acc, op <- ops
+                            , let acc' = x `op` y, acc' <= max ]
 
 part1 :: Input -> Int
 part1 input = sum $ map fst possibles
-  where possible (res, xs) = elem res $ canEvaluateTo 0 xs
+  where possible (res, xs) = elem res $ evaluations res [(+), (*)] xs
         possibles = filter possible input
 
 answer1 = part1 <$> input
@@ -40,15 +41,9 @@ conc x y = x * 10 ^ numDigits y + y
           | y < 10000 = 4
           | otherwise = 5
 
-canEvaluateTo2 max !acc = \case
-  _ | acc > max -> []
-  [] -> [acc]
-  x:xs -> canEvaluateTo2 max (acc + x) xs ++ canEvaluateTo2 max (acc * x) xs ++
-          canEvaluateTo2 max (conc acc x) xs
-
 part2 :: Input -> Int
 part2 input = sum $ map fst possibles
-  where possible (res, xs) = elem res $ canEvaluateTo2 res 0 xs
+  where possible (res, xs) = elem res $ evaluations res [(+), (*), conc] xs
         possibles = filter possible input
 
 answer2 = part2 <$> input
