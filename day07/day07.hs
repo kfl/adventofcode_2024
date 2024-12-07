@@ -32,13 +32,13 @@ part1 input = sum $ map fst possibles
 answer1 = part1 <$> input
 
 numDigitsSlow x = ceiling $ logBase 10 (fromIntegral (x + 1))
-conc x y = x * 10 ^ (numDigits y) + y
-  where numDigits y =
-          if y < 10 then 1
-          else if y < 100 then 2
-          else if y < 1000 then 3
-          else if y < 10000 then 4
-          else 5
+conc x y = x * 10 ^ numDigits y + y
+  where numDigits y
+          | y < 10 = 1
+          | y < 100 = 2
+          | y < 1000 = 3
+          | y < 10000 = 4
+          | otherwise = 5
 
 canEvaluateTo2 max !acc = \case
   _ | acc > max -> []
