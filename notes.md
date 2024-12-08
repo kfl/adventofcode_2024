@@ -88,3 +88,14 @@ running time under 1s.
 
 **Maybe some day:** The problem seem suited for both memorisation or
 parallel search.
+
+
+Day 8: Resonant Collinearity
+----------------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** Grid parsing via list comprehensions
+
+**Thoughts on the puzzle:** Got to exercise my list comprehensions
+(again).
