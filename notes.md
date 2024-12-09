@@ -105,3 +105,5 @@ Day 9: Disk Fragmenter
 ----------------------
 
 **Language used:** Haskell
+
+**Thoughts on the puzzle:** Solved puzzle using stupid brute force algorithm.
