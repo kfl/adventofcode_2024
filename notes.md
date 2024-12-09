@@ -99,3 +99,9 @@ Day 8: Resonant Collinearity
 
 **Thoughts on the puzzle:** Got to exercise my list comprehensions
 (again).
+
+
+Day 9: Disk Fragmenter
+----------------------
+
+**Language used:** Haskell
