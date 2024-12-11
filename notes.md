@@ -107,3 +107,21 @@ Day 9: Disk Fragmenter
 **Language used:** Haskell
 
 **Thoughts on the puzzle:** Solved puzzle using stupid brute force algorithm.
+
+
+Day 10: Hoof It
+---------------
+
+Didn't solve the puzzle on December 10th.
+
+
+Day 11: Plutonian Pebbles
+-------------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** `map read`
+
+**Thoughts on the puzzle:** Straightforward part 1. In part 2 I use a
+multi-map to represent the stones, that is I lumps all stone with the
+same value together and then I blink them all at the same time.
