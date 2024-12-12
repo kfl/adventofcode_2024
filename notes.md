@@ -112,7 +112,7 @@ Day 9: Disk Fragmenter
 Day 10: Hoof It
 ---------------
 
-Didn't solve the puzzle on December 10th.
+Didn't solve the puzzle on December 10, 2024.
 
 
 Day 11: Plutonian Pebbles
@@ -125,3 +125,16 @@ Day 11: Plutonian Pebbles
 **Thoughts on the puzzle:** Straightforward part 1. In part 2 I use a
 multi-map to represent the stones, that is I lumps all stone with the
 same value together and then I blink them all at the same time.
+
+
+Day 12: Garden Groups
+---------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** Grid parsing via list comprehensions
+
+**Thoughts on the puzzle:** Straightforward part 1. In part 2 counting
+sides is the same as counting corners. It took far too long to get the
+logic right and somewhat concise, it might be possible to make it even
+more concise. But at least it is nicely data-parallel.
