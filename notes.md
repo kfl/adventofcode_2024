@@ -138,3 +138,16 @@ Day 12: Garden Groups
 sides is the same as counting corners. It took far too long to get the
 logic right and somewhat concise, it might be possible to make it even
 more concise. But at least it is nicely data-parallel.
+
+
+Day 13: Claw Contraption
+------------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** Regular expressions
+
+**Thoughts on the puzzle:** Solved part 1 in a pedestrian manner just
+for the sake of it. Solved part 2 by solving a pair of linear integer
+equations with two unknowns. Spend a little time get the code for
+checking for integer solutions nice and tidy once I got it right.
