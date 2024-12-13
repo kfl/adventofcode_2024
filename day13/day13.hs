@@ -1,4 +1,3 @@
-{-# LANGUAGE LambdaCase, Strict #-}
 module Main where
 
 import qualified Data.List.Split as L
@@ -58,9 +57,9 @@ solve (M ax ay bx by px py) =
     0                            -> Nothing -- No solution (or infinitely many)
     _ | (i, 0) <- di `quotRem` d
       , (j, 0) <- dj `quotRem` d -> Just $ 3*i + j
-    otherwise                    -> Nothing -- No integer solution
+    _                            -> Nothing -- No integer solution
   where d  = ax*by - ay*bx
-        di = px*by - py*bx
+        di = by*px - bx*py
         dj = ax*py - ay*px
 
 part2 :: Input -> Int
