@@ -151,3 +151,18 @@ Day 13: Claw Contraption
 for the sake of it. Solved part 2 by solving a pair of linear integer
 equations with two unknowns. Spend a little time get the code for
 checking for integer solutions nice and tidy once I got it right.
+
+
+Day 14: Restroom Redoubt
+------------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** Regular expressions (hope this isn't a trend)
+
+**Thoughts on the puzzle:** Fun puzzle. Had fun making the quadrant
+counting in part 1 data-parallel. In part 2, the hard part was to
+automate the detection of a Christmas tree. My first guess was that it
+would be a configuration with a lot of robots in the same column, that
+didn't work. So I made it more precise and looked for a configuration
+with a long straight vertical line, that worked.
