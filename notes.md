@@ -166,3 +166,18 @@ automate the detection of a Christmas tree. My first guess was that it
 would be a configuration with a lot of robots in the same column, that
 didn't work. So I made it more precise and looked for a configuration
 with a long straight vertical line, that worked.
+
+
+
+Day 15: Warehouse Woes
+----------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** Grid parsing via list comprehensions and string
+splitting.
+
+**Thoughts on the puzzle:** Got to work with mutable arrays in part 1,
+was pleasantly surprised. Switched to an immutable `Map` in part 2,
+the code still feels a bit clunky with kinda different algorithms for
+vertical and horizontal movements.
