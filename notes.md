@@ -181,3 +181,17 @@ splitting.
 was pleasantly surprised. Switched to an immutable `Map` in part 2,
 the code still feels a bit clunky with kinda different algorithms for
 vertical and horizontal movements.
+
+
+Day 16: Reindeer Maze
+---------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** Grid parsing via list comprehensions and string
+splitting.
+
+**Thoughts on the puzzle:** Decided to use my own dijkstra
+implementation in part 1. That decision paid of in part 2, where I
+just had to update the `pathCost` map, and then reconstruct all
+relevant positions from that.
