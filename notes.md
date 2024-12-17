@@ -195,3 +195,17 @@ splitting.
 implementation in part 1. That decision paid of in part 2, where I
 just had to update the `pathCost` map, and then reconstruct all
 relevant positions from that.
+
+
+Day 17: Chronospatial Computer
+------------------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** read abuse.
+
+**Thoughts on the puzzle:** Favourite task. Got to write both an
+straight interpreter and symbolic execution. There is a bit too much
+repetition between the two parts for the code to be super nice.
+
+**Maybe some day:** Write a visual interpreter.
