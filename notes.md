@@ -209,3 +209,20 @@ straight interpreter and symbolic execution. There is a bit too much
 repetition between the two parts for the code to be super nice.
 
 **Maybe some day:** Write a visual interpreter.
+
+
+Day 18: RAM Run
+---------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** read abuse.
+
+**Thoughts on the puzzle:** Solved the puzzle in 15-20 min breaks
+between meeting. Used Dijkstra's shortest path algorithm for part 1
+(overkill). Did the simplest thing I could think of for part 2, that
+was fast enough to solve part 2 in ~12s. Too slow for my taste but OK
+given the day.
+
+**Maybe some day:** Use the current code to experiment with different
+choices for internal data structures in Dijkstra's algorithm.
