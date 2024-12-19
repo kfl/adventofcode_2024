@@ -239,4 +239,6 @@ Day 19: Linen Layout
 expression. Tried first to solve part 2 by using `ReadP` but that blew
 up. Then looked at why it blew up (by re-reading the example from the
 task description) realised that it is a combinatorial problem, and
-then reached for memorisation. That worked.
+then reached for memorisation. That worked. Both parts are solved in
+less than 2s, which is OK, but I'd like to get below 1s. Switched
+`Bytestring` instead of `String` that brought the running time under 1s.

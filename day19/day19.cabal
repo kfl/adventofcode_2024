@@ -9,14 +9,15 @@ maintainer:         ken@friislarsen.net
 
 copyright: Ken Friis Larsen <ken@friislarsen.net>
 
+
 executable day19
     main-is: day19.hs
 
     build-depends:    base >= 4 && < 5,
+                      bytestring >= 0.12.1.0,
                       containers,
-                      MemoTrie,
                       regex-tdfa,
-                      split
+                      uglymemo
 
     hs-source-dirs:   .
     default-language: GHC2021

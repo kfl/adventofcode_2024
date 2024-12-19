@@ -1,16 +1,15 @@
-{-# LANGUAGE LambdaCase, Strict #-}
+{-# LANGUAGE LambdaCase, OverloadedStrings #-}
 module Main where
 
 import qualified Data.Char as C
 import qualified Data.List as L
-import qualified Data.List.Split as L
-import qualified Data.Map.Strict as Map
-import Data.Map.Strict (Map)
 
 import Text.Regex.TDFA ((=~))
-import qualified Data.MemoTrie as Memo
+
+import Data.MemoUgly (memo)
 import Data.Maybe (mapMaybe)
 
+import qualified Data.ByteString.Char8 as C
 
 test =  parse [ "r, wr, b, g, bwu, rb, gb, br"
               , ""
@@ -23,27 +22,32 @@ test =  parse [ "r, wr, b, g, bwu, rb, gb, br"
               , "brgr"
               , "bbrgwb"
               ]
-input = parse . lines <$> readFile "input.txt"
+input = parse . C.lines <$> C.readFile "input.txt"
 
-type Input = ([String], [String])
+type Input = ([C.ByteString], [C.ByteString])
 
-parse (pats : _ : designs) = (L.wordsBy (`elem` ", ") pats, designs)
+parse (pats : _ : designs) = (map C.dropSpace $ C.split ',' pats, designs)
 
 part1 :: Input -> Int
 part1 (pats, designs) = length $ filter (=~ desired) designs
-  where alphabet = L.intercalate "|" pats
-        desired = "^("++alphabet++")*$"
+  where alphabet = C.intercalate "|" pats
+        desired = C.concat ["^(", alphabet, ")*$"]
 answer1 = part1 <$> input
+
+part1' :: Input -> Int
+part1' (pats, designs) = length $ filter possible designs
+  where possible = memo $ \case "" -> True
+                                s  -> any possible $ mapMaybe (`C.stripPrefix` s) pats
 
 
 part2 :: Input -> Int
 part2 (pats, designs) = sum $ map ways designs
-  where ways = Memo.memo $ \case "" -> 1
-                                 s  -> sum $ map ways $ mapMaybe (`L.stripPrefix` s) pats
+  where ways = memo $ \case "" -> 1
+                            s  -> sum $ map ways $ mapMaybe (`C.stripPrefix` s) pats
 
 answer2 = part2 <$> input
 
 main = do
   inp <- input
-  print $ part1 inp
+  print $ part1' inp
   print $ part2 inp
