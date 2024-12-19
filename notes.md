@@ -226,3 +226,17 @@ given the day.
 
 **Maybe some day:** Use the current code to experiment with different
 choices for internal data structures in Dijkstra's algorithm.
+
+
+Day 19: Linen Layout
+--------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** splitting
+
+**Thoughts on the puzzle:** Solved part 1 by building a regular
+expression. Tried first to solve part 2 by using `ReadP` but that blew
+up. Then looked at why it blew up (by re-reading the example from the
+task description) realised that it is a combinatorial problem, and
+then reached for memorisation. That worked.
