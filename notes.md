@@ -219,7 +219,7 @@ Day 18: RAM Run
 **Parsing strategy:** read abuse.
 
 **Thoughts on the puzzle:** Solved the puzzle in 15-20 min breaks
-between meeting. Used Dijkstra's shortest path algorithm for part 1
+between meetings. Used Dijkstra's shortest path algorithm for part 1
 (overkill). Did the simplest thing I could think of for part 2, that
 was fast enough to solve part 2 in ~12s. Too slow for my taste but OK
 given the day.
@@ -242,3 +242,13 @@ task description) realised that it is a combinatorial problem, and
 then reached for memorisation. That worked. Both parts are solved in
 less than 2s, which is OK, but I'd like to get below 1s. Switched
 `Bytestring` instead of `String` that brought the running time under 1s.
+
+
+Day 20: Race Condition
+----------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** read abuse.
+
+**Thoughts on the puzzle:** Didn't solve the puzzle on December 20, 2024.
