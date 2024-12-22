@@ -252,3 +252,24 @@ Day 20: Race Condition
 **Parsing strategy:** read abuse.
 
 **Thoughts on the puzzle:** Didn't solve the puzzle on December 20, 2024.
+
+
+Day 21: Keypad Conundrum
+------------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** non really
+
+**Thoughts on the puzzle:** Combinatorial problem, so I used memorisation.
+
+
+Day 22: Monkey Market
+---------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** read
+
+**Thoughts on the puzzle:** Had to resort to the `Par` to get (just)
+below 1s.
