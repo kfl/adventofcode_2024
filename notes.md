@@ -271,5 +271,8 @@ Day 22: Monkey Market
 
 **Parsing strategy:** read
 
-**Thoughts on the puzzle:** Had to resort to the `Par` to get (just)
-below 1s.
+**Thoughts on the puzzle:** Had to resort to using the `Par` monad to
+get (just) below 1s.
+
+**Maybe some day:** Try to use a faster data structure, like an
+unboxed `Vector` instead of the `IntMap`.

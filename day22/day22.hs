@@ -38,7 +38,7 @@ nextNum !secret = step3
         -- Step 2: divide by 32 (shift right by 5)
         step2 = prune $ step1 `mix` (step1 `shiftR` 5)
         -- Step 3: multiply by 2048 (shift left by 11)
-        !step3 = prune $ step2 `mix` (step2 * 2048)
+        !step3 = prune $ step2 `mix` (step2 `shiftL` 11)
 
 part1 :: Input -> Int
 part1 input = sum $ map iter2000 input
