@@ -276,3 +276,16 @@ get (just) below 1s.
 
 **Maybe some day:** Try to use a faster data structure, like an
 unboxed `Vector` instead of the `IntMap`.
+
+
+Day 23: LAN Party
+-----------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** Used `ByteString` and `ShortByteString` just for
+the fun of it.
+
+**Thoughts on the puzzle:** Nice graph tasks. For part 2 I implemented
+a branch-and-bound algorithm to find the largest clique, that worked
+much better than anticipated.
