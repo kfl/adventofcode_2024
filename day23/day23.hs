@@ -85,11 +85,7 @@ largestClique g = search Set.empty (Map.keysSet g) Set.empty
     -- Branch-and-bound algorithm to find the maximum clique.
     -- `cur` is the current clique, `candidates` are potential nodes we can still add,
     -- and `bestSoFar` is the best clique we’ve found up to now.
-    search
-      :: Set Node      -- ^ current clique (R)
-      -> Set Node      -- ^ candidate set
-      -> Set Node      -- ^ best clique so far
-      -> Set Node      -- ^ returns updated best clique
+    search :: Set Node -> Set Node -> Set Node -> Set Node
     search cur candidates bestSoFar
       -- 1. Prune if even adding *all* candidates can't beat current best
       | Set.size cur + Set.size candidates <= Set.size bestSoFar = bestSoFar
