@@ -289,3 +289,14 @@ the fun of it.
 **Thoughts on the puzzle:** Nice graph tasks. For part 2 I implemented
 a branch-and-bound algorithm to find the largest clique, that worked
 much better than anticipated.
+
+
+Day 24: Crossed Wires
+---------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** String splitting
+
+**Thoughts on the puzzle:** Simple evaluator for part1. Didn't have
+time for part 2 on Dec 24. 2024.
