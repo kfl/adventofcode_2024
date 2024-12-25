@@ -300,3 +300,17 @@ Day 24: Crossed Wires
 
 **Thoughts on the puzzle:** Simple evaluator for part1. Didn't have
 time for part 2 on Dec 24. 2024.
+
+**Ideas for part 2:** The best I can come up that seem feasible
+efficient, is to generate a correct adder, and then compare it with
+the given adder to find the errors.
+
+
+Day 25: Code Chronicle
+----------------------
+
+**Language used:** Haskell
+
+**Parsing strategy:** String splitting, and list `transpose`
+
+**Thoughts on the puzzle:** List comprehension.
