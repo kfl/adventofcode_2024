@@ -114,6 +114,16 @@ Day 10: Hoof It
 
 Didn't solve the puzzle on December 10, 2024.
 
+**Solved it on December 28, 2024**
+
+**Language used:** Haskell
+
+**Parsing strategy:** Grid parsing via list comprehensions
+
+**Thoughts on the puzzle:** Simple BFS in part 1. Used a multi-map in
+part 2 to compute all different paths together.
+
+
 
 Day 11: Plutonian Pebbles
 -------------------------

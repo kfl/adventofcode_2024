@@ -1,0 +1,22 @@
+cabal-version:      3.6
+name:               day10
+version:            0.1.0.0
+
+license:            MIT
+license-file:       ../LICENSE
+author:             Ken Friis Larsen
+maintainer:         ken@friislarsen.net
+
+copyright: Ken Friis Larsen <ken@friislarsen.net>
+
+executable day10
+    main-is: day10.hs
+
+    build-depends:    base >= 4 && < 5,
+                      array,
+                      containers,
+                      split
+
+    hs-source-dirs:   .
+    default-language: GHC2021
+    ghc-options:      -O2 -threaded -rtsopts -with-rtsopts=-N
