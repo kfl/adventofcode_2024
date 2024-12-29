@@ -257,11 +257,18 @@ less than 2s, which is OK, but I'd like to get below 1s. Switched
 Day 20: Race Condition
 ----------------------
 
+Didn't solve the puzzle on December 20, 2024.
+
+**Solved it on December 29, 2024**
+
 **Language used:** Haskell
 
 **Parsing strategy:** read abuse.
 
-**Thoughts on the puzzle:** Didn't solve the puzzle on December 20, 2024.
+**Thoughts on the puzzle:** Used BFS to find initial path. Part 1 is
+an almost literal implementation of the specification. I part 2 I take
+a bit more care not to construct duplicates, but otherwise it's
+basically the same solution.
 
 
 Day 21: Keypad Conundrum
