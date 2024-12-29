@@ -47,7 +47,9 @@ follow next = L.foldl' go Set.empty
           | otherwise = L.foldl' go (Set.insert x seen) $ next x
 
 score :: Grid -> Pos -> Int
-score grid trailhead = Set.size $ Set.filter ((== 9) . (grid !)) $ follow next [trailhead]
+score grid trailhead = Set.size
+                       $ Set.filter ((== 9) . (grid !))
+                       $ follow next [trailhead]
   where next from = [ to | d <- directions, let to = from |+| d
                          , Just (h+1) == grid !? to ]
           where h = grid ! from
@@ -62,9 +64,10 @@ answer1 = part1 <$> input
 -- the next height take. Returns multi-map of all possible next
 -- locations and their multiplicity.
 multiStep :: Grid -> Map Pos Int -> Int -> Map Pos Int
-multiStep grid acc hn = Map.fromListWith (+) [(to, n) | (from, n) <- Map.assocs acc
-                                                      , d <- directions, let to = from |+| d
-                                                      , Just hn == grid !? to ]
+multiStep grid acc hn =
+  Map.fromListWith (+) [(to, n) | (from, n) <- Map.assocs acc
+                                , d <- directions, let to = from |+| d
+                                , Just hn == grid !? to ]
 
 rating :: Grid -> Pos -> Int
 rating grid trailhead = sum $ L.foldl' (multiStep grid) (Map.singleton trailhead 1) [1..9]
