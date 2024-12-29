@@ -322,6 +322,9 @@ time for part 2 on Dec 24. 2024.
 efficient, is to generate a correct adder, and then compare it with
 the given adder to find the errors.
 
+**Solved part 2 on December 29, 2024:** Generate a visualisation of
+the graph, try to colour suspicious, and fix the graph by hand. Not fun.
+
 
 Day 25: Code Chronicle
 ----------------------

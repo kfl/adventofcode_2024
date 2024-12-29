@@ -9,6 +9,11 @@ import Data.Map.Strict (Map)
 
 import Data.Bifunctor (second)
 
+import Data.Maybe (maybeToList)
+import Text.Printf
+import System.Process (callCommand)
+
+
 test =  parse $ unlines [ "x00: 1"
                         , "x01: 0"
                         , "x02: 1"
@@ -76,42 +81,72 @@ parse str = (map initialisation inits, Map.fromList $ map wirering wires)
 
 apply = \case AND -> (&&); OR -> (||); XOR -> (/=)
 
-
-eval1 init circuit output = L.mapAccumL readOut state output
+eval1 init circuit = map read
   where state = Map.fromList init
-        readOut st s =
-          case st Map.!? s of
-            Just v -> (st, v)
-            Nothing -> let (lhs, op, rhs) = circuit Map.! s
-                           (st1, v1) = readOut st lhs
-                           (st2, v2) = readOut st1 rhs
-                           v3 = apply op v1 v2
-                       in  (Map.insert s v3 st2, v3)
+                <> fmap (\(lhs, op, rhs) -> apply op (read lhs) (read rhs)) circuit
+        read s = state Map.! s
 
 fromBits :: [Bool] -> Int
 fromBits = L.foldr (\b acc -> acc * 2 + fromEnum b) 0
 
 part1 :: Input -> Int
-part1 (init, circuit) = fromBits $ snd $ eval1 init circuit output
+part1 (init, circuit) = fromBits $ eval1 init circuit output
   where output = filter ("z" `L.isPrefixOf`) $ Map.keys circuit
 answer1 = part1 <$> input
 
-allPairs8 keys = [ ((k1, k2), (k3, k4), (k5, k6), (k7, k8))
-                 | k1 : k2s <- L.tails keys
-                 , k2 : k3s <- L.tails k2s
-                 , k3 : k4s <- L.tails k3s
-                 , k4 : k5s <- L.tails k4s
-                 , k5 : k6s <- L.tails k5s
-                 , k6 : k7s <- L.tails k6s
-                 , k7 : k8s <- L.tails k7s
-                 , k8 <- k8s
-                 ]
 
-part2 :: Input -> Int
-part2 (init, circuit) = undefined
+
+showCircuit name circuit = do
+  let trans = [ s
+              | (cur, (lhs, op, rhs)) <- Map.assocs circuit
+              , let opr = lhs++show op++rhs
+                    colour
+                      | "z" `L.isPrefixOf` cur && cur /= "z45" && op /= XOR = ["orange"]
+                      | otherwise = [ "red"
+                                    | prev <- [lhs, rhs]
+                                    , case circuit Map.!? prev of
+                                        Just (_, prevOp, _) ->
+                                          case (prevOp, op) of
+                                            (AND, AND) -> True -- AND gates should not connect
+                                            (OR, OR)   -> True -- OR gates should not connect
+                                            (XOR, OR)  -> True
+                                            _ -> False
+                                        _ -> False ]
+              , s <- [ printf "  %s [label=\"%s\", style=solid];" opr (show op)
+                     , printf "  %s -> %s;" lhs opr
+                     , printf "  %s -> %s;" rhs opr
+                     , printf "  %s -> %s;" opr cur] ++
+                     [ printf "  %s [color=\"%s\"];" cur c | c <- take 1 colour ]
+              ]
+      dotfile = name ++ ".dot"
+      pdffile = name ++ ".pdf"
+      pre = [ "digraph circuit {"
+            , "   rankdir=\"LR\";"
+            , "   node [style=filled];"
+            ]
+  writeFile dotfile $ unlines $ pre ++ trans ++ ["}"]
+  callCommand $ "dot -Tpdf "++dotfile ++" -o "++pdffile
+  callCommand $ "open -a Preview "++pdffile
+
+
+swap circuit (x,y) = Map.insert x (circuit Map.! y) $ Map.insert y (circuit Map.! x) circuit
+swaps xys circuit = L.foldl' swap circuit xys
+
+
+debugViaManualLabour = do
+   -- showCircuit "orig" =<< swaps [] . snd <$> input
+   showCircuit "fixed"
+     . swaps [("jss", "rds"), ("mvb", "z08"),("wss", "z18"), ("bmn", "z23")]
+     . snd
+     =<< input
+part2 :: Input -> String
+part2 (init, circuit) =  L.intercalate ","
+                         $ L.sort
+                         $ concatMap (\(x,y) -> [x,y]) [ ("jss", "rds"), ("mvb", "z08")
+                                                       , ("wss", "z18"), ("bmn", "z23")]
 answer2 = part2 <$> input
 
 main = do
   inp <- input
   print $ part1 inp
---  print $ part2 inp
+  putStrLn $ part2 inp

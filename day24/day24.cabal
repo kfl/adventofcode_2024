@@ -14,6 +14,7 @@ executable day24
 
     build-depends:    base >= 4 && < 5,
                       containers,
+                      process >= 1.6.18.0,
                       split
 
     hs-source-dirs:   .
