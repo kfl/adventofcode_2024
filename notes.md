@@ -237,6 +237,11 @@ given the day.
 **Maybe some day:** Use the current code to experiment with different
 choices for internal data structures in Dijkstra's algorithm.
 
+**December 30, 2024:** Added faster algorithm for part 2 that uses
+`scanl`. It keeps track of the current shortest path and only find a
+new path when a new obstacle falls on the current shortest path. It
+brings the running time under 1s.
+
 
 Day 19: Linen Layout
 --------------------

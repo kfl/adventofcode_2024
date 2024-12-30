@@ -16,7 +16,8 @@ executable day18
                       array,
                       containers,
                       hashable,
-                      psqueues
+                      psqueues,
+                      unordered-containers
 
 
     hs-source-dirs:   .
