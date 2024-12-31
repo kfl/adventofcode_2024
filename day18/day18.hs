@@ -1,10 +1,7 @@
 {-# LANGUAGE ViewPatterns #-}
 module Main where
 
-import qualified Data.Char as C
 import qualified Data.List as L
-import qualified Data.Map.Strict as Map
-import Data.Map.Strict (Map)
 
 import qualified Data.Set as Set
 import Data.Set (Set)
@@ -15,9 +12,6 @@ import Data.Maybe (fromMaybe, isNothing)
 import qualified Data.Hashable as H
 import qualified Data.HashPSQ as Q
 import qualified Data.HashMap.Strict as HMap
-
-import Data.Foldable (asum)
-
 
 test =  map parse [ "5,4"
                   , "4,2"
@@ -94,6 +88,7 @@ dijkstra next found initial = loop initPathCost initPrev startFrontier
     reconstruct goal prev = reverse $ go [] goal
       where go acc cur = maybe (cur:acc) (go (cur:acc)) $ HMap.lookup cur prev
 
+
 part1 :: Int -> Int -> Int -> Input -> Int
 part1 maxC maxR drops positions = maybe (error "dijkstra couldn't find a path") fst
                                   $ dijkstra next found start
@@ -106,6 +101,7 @@ part1 maxC maxR drops positions = maybe (error "dijkstra couldn't find a path") 
         found = (== goal)
 
 answer1 = part1 70 70 1024 <$> input
+
 
 part2 :: Int -> Int -> Input -> Pos
 part2 maxC maxR positions = maybe (error "There's always an exit")
@@ -120,10 +116,8 @@ part2 maxC maxR positions = maybe (error "There's always an exit")
         blocked = L.find (\ps -> isNothing $ dijkstra (next $ Set.fromList ps) found start) $ L.inits positions
 
 
-firstRight = asum . map (either (const Nothing) Just)
-
 part2' :: Int -> Int -> Input -> Pos
-part2' maxC maxR positions = fromMaybe (error "There's always an exit") bad
+part2' maxC maxR positions = either (error "There's always an exit") id blocked
   where start = (0,0)
         goal = (maxC, maxR)
         next corrupted p = [ (p', 1) | d <- directions
@@ -139,10 +133,9 @@ part2' maxC maxR positions = fromMaybe (error "There's always an exit") bad
           , Just (_, new) <- dijkstra (next cor') found start = Left (cor', Set.fromList new)
           | otherwise = Right p
 
-        firstPath = ((0,) <$> [0..70]) ++ ((,70) <$> [1..70])
+        firstPath = Set.fromList $ map (0,) [0..70] ++ map (,70) [1..70]
 
-        blocked = L.scanl' check (Left (Set.empty, Set.fromList firstPath)) positions
-        bad = firstRight blocked
+        blocked = L.foldl' check (Left (Set.empty, firstPath)) positions
 
 
 answer2 = part2' 70 70 <$> input
