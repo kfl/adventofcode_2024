@@ -10,7 +10,11 @@ import qualified Data.IntMap.Strict as IntMap
 
 import Data.Int (Int64, Int8)
 import Data.Bits (xor, Bits, shiftL, shiftR, (.&.), (.|.))
+
 import Control.Monad.Par (runPar, parMap)
+import qualified Control.Monad.Par as Par
+import qualified Data.Vector.Unboxed as V
+
 
 
 test =  map parse [ "1"
@@ -67,9 +71,41 @@ part2 secrets = maximum $ allWindowPrices secrets
 
     allWindowPrices = IntMap.unionsWith (+) . runPar . parMap windowPrices
 
-answer2 = part2 <$> input
+
+part2' :: Input -> Int
+part2' secrets = maximum allWindowPrices
+  where
+    priceChange :: Int -> V.Vector (Int, Int)
+    priceChange secret = V.zip prices (V.cons 0 $ V.zipWith (-) (V.tail prices) prices)
+      where prices = V.map (`mod` 10) $ V.iterateN 2000 nextNum secret
+
+    windowPrice :: V.Vector (Int, Int) -> [(Int, Int)]
+    windowPrice pc = L.unfoldr step 0
+      where
+        len = V.length pc
+        step i
+          | i + 3 < len =
+            let (_, a) = pc V.! i
+                (_, b) = pc V.! (i + 1)
+                (_, c) = pc V.! (i + 2)
+                (p, d) = pc V.! (i + 3)
+            in  Just ((pack4 a b c d, p), i + 1)
+          | otherwise = Nothing
+
+    windowPrices secret = IntMap.fromListWith (\_ y -> y)
+                          $ windowPrice
+                          $ priceChange secret
+
+    secretsV = V.fromList secrets
+    mapper i = return $ windowPrices (secretsV V.! i)
+    range = Par.InclusiveRange 0 (V.length secretsV - 1)
+    combine x y = return $ IntMap.unionWith (+) x y
+
+    allWindowPrices = runPar $ Par.parMapReduceRange range mapper combine IntMap.empty
+
+answer2 = part2' <$> input
 
 main = do
   inp <- input
   print $ part1 inp
-  print $ part2 inp
+  print $ part2' inp

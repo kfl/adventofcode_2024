@@ -299,6 +299,10 @@ get (just) below 1s.
 **Maybe some day:** Try to use a faster data structure, like an
 unboxed `Vector` instead of the `IntMap`.
 
+**Improved part 2 on January 1, 2025:** Made the code twice as fast by
+using unboxed vectors and proper parallel map-reduce.
+
+
 
 Day 23: LAN Party
 -----------------
