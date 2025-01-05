@@ -54,7 +54,7 @@ pack4 a b c d = to5Bits a
                 .|. (to5Bits b `shiftL` 5)
                 .|. (to5Bits c `shiftL` 10)
                 .|. (to5Bits d `shiftL` 15)
-  where to5Bits x = x + 9 .&. 0x1F  -- 0x1F = 31 in decimal
+  where to5Bits !x = x + 9 .&. 0x1F  -- 0x1F = 31 in decimal
 
 part2 :: Input -> Int
 part2 secrets = maximum $ allWindowPrices secrets
